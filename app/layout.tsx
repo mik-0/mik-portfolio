@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Portfolio - Mike Wu",
-  description: "Website that showcases my projects and skills.",
+  title: "Mike Wu",
+  description:
+    "Full-stack developer and CS / AI master's student at Delft University of Technology.",
 };
 
 export default function RootLayout({
