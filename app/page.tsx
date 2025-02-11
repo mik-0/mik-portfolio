@@ -1,101 +1,78 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { BsGithub } from "react-icons/bs";
+
+import Frameworks from "./components/Frameworks";
+import Languages from "./components/Languages";
+import Projects from "./components/Projects";
+import ProjectImageModal from "./components/ProjectImageModal";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [assoc, setAssoc] = useState<string | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+  const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [imagePath, setImagePath] = useState<
+    | {
+        project: string;
+        index: number;
+        maxIndex: number;
+      }
+    | undefined
+  >(undefined);
+
+  return (
+    <div className="mx-auto w-[90%] sm:w-[40%] py-10 sm:py-20">
+      <ProjectImageModal
+        open={imageModalOpen}
+        imagePath={imagePath}
+        setImageModalOpen={setImageModalOpen}
+        setImagePath={setImagePath}
+      />
+      <main className=" ">
+        <header className="flex items-start gap-x-4">
+          <div
+            className="w-14 h-14 rounded-full aspect-square object-contain"
+            style={{
+              backgroundImage: "url(/pfp.jpg)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          <div className="grow">
+            <h1 className="text-lg font-medium">Mike Wu</h1>
+            <p className="font-light text-white/80">Web / Software Developer</p>
+          </div>
+          <div className="flex items-center gap-x-2">
+            <a
+              className="flex items-center gap-x-2 py-2 px-4 rounded bg-white/5 hover:bg-white/20 transition-all"
+              href="https://github.com/mik-0"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BsGithub size={16} />
+              <p className="text-sm">GitHub</p>
+            </a>
+          </div>
+        </header>
+
+        <section className="mt-10 space-y-2">
+          <p className="text-white/80">
+            Hi everyone, I am a web and software developer based in The
+            Netherlands. I am currently doing my master&apos;s in Computer
+            Science (AI Track) at the Delft University of Technology.
+          </p>
+        </section>
+
+        <Languages setAssoc={setAssoc} assoc={assoc} />
+
+        <Frameworks assoc={assoc} />
+
+        <Projects
+          setImageModalOpen={setImageModalOpen}
+          setImagePath={setImagePath}
+        />
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
