@@ -22,7 +22,7 @@ export default function Home() {
   >(undefined);
 
   return (
-    <div className="mx-auto w-[90%] sm:w-[40%] py-10 sm:py-20">
+    <div className="mx-auto max-w-sm sm:max-w-xl py-10 sm:py-20">
       <ProjectImageModal
         open={imageModalOpen}
         imagePath={imagePath}
